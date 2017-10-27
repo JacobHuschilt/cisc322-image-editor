@@ -78,4 +78,11 @@ public class ImageContents {
 	    }
     } // end getContentStream
 
+    /**
+     * Gets the BufferedImage object.
+     */
+    public BufferedImage getImg() {
+        return img;
+    }
+
 } // end TextContents
