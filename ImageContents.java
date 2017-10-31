@@ -3,6 +3,8 @@ import java.io.*;
 import javax.imageio.*;
 import ca.queensu.cs.dal.edfmwk.doc.DocumentException;
 
+import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
+
 /**
  * Internal representation of an image document.
  *<p>
@@ -28,7 +30,7 @@ public class ImageContents {
      */
     public void open(InputStream in) throws IOException {	
 	    try {
-	        img = imageIO.read(in);
+	        img = ImageIO.read(in);
 	    } catch (Exception e) {
 	        //	throw new IOException(e);
 	        throw new IOException(e.getLocalizedMessage());
