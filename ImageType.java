@@ -36,7 +36,7 @@ public class ImageType implements DocumentType {
      * Create and initialize a new representation for an image document.
      * @return the new document contents.
      */
-    public Image newImage() {
+    public ImageDocument newDocument() {
 	return new ImageDocument(this);
     }
 
@@ -112,10 +112,10 @@ public class ImageType implements DocumentType {
 
     //Not sure what to do here...helpp?? -Julia
     private static String[][] actionPairs = {
-	{ "Edit/Rotate", DefaultEditorKit.} ,
-	{ "Edit/Cut", DefaultEditorKit.cutAction},
+//	{ "Edit/Rotate", DefaultEditorKit.} ,
+//	{ "Edit/Cut", DefaultEditorKit.cutAction},
 	// { "", DefaultEditorKit.cutAction}, // test error check
-	{ "Edit/Paste", DefaultEditorKit.pasteAction}
+//	{ "Edit/Paste", DefaultEditorKit.pasteAction}
     };
 
 
@@ -159,10 +159,10 @@ public class ImageType implements DocumentType {
 	if (menu==null) {
 	    menu = new MenuDescriptor();
 	    try {
-		menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
-		menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
-		menu.addElement(new MenuElement("Edit/Resize", new ResizeAction()));
-		menu.addElement(new MenuElement("Edit/Adjust Brightness", new AdjustBrightnessAction()));
+//		menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
+//		menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
+//		menu.addElement(new MenuElement("Edit/Resize", new ResizeAction()));
+//		menu.addElement(new MenuElement("Edit/Adjust Brightness", new AdjustBrightnessAction()));
 	    } catch (Exception e) {
 		Log.internalError("Menu element error "+e.getLocalizedMessage());
 	    }
