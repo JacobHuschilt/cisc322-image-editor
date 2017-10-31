@@ -3,12 +3,16 @@
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.Writer;
 import java.nio.Buffer;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 // Import only those classes from edfmwk that are actually used, for
 // documentation purposes.
 import ca.queensu.cs.dal.edfmwk.win.TextAreaWriter;
+
+import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
  * Main panel for the editor's user inferface.
@@ -22,16 +26,17 @@ public class MainPanel extends JPanel {
      * The initial GUI component to display.
      */
     private JLabel mainArea;
-    private BufferedImage imageToDisplay;
+    private BufferedImage image;
 
     /**
      * Constructs the main panel.
      */
-    public MainPanel(BufferedImage imageToDisplay) {
+    public MainPanel() {
         super();
-        this.imageToDisplay = imageToDisplay;
 
-        mainArea = new JLabel(new ImageIcon(imageToDisplay));
+        mainArea = new JLabel();
+
+        update(new BufferedImage(600, 400, TYPE_INT_ARGB));
 
         JScrollPane sc = new JScrollPane(mainArea);
 
@@ -40,4 +45,10 @@ public class MainPanel extends JPanel {
         add(sc, BorderLayout.CENTER);
     }
 
+    public void update(BufferedImage image) {
+        this.image = image;
+
+        ImageIcon imageIcon = new ImageIcon(image);
+        mainArea.setIcon(imageIcon);
+    }
 }
