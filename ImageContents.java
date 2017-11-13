@@ -20,7 +20,7 @@ public class ImageContents {
      * Constructs a default image file contents of size 100x100 px.
      */
     public ImageContents() {
-        img = new BufferedImage(100, 100, TYPE_INT_ARGB);
+        img = new BufferedImage(500, 500, TYPE_INT_ARGB);
     } // end constructor
 
     /**
@@ -30,7 +30,7 @@ public class ImageContents {
      */
     public void open(InputStream in) throws IOException {	
 	    try {
-	        img = ImageIO.read(in);
+            img = ImageIO.read(in);
 	    } catch (Exception e) {
 	        //	throw new IOException(e);
 	        throw new IOException(e.getLocalizedMessage());

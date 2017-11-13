@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.Writer;
 import java.nio.Buffer;
 import javax.imageio.ImageIO;
@@ -26,7 +27,6 @@ public class MainPanel extends JPanel {
      * The initial GUI component to display.
      */
     private JLabel mainArea;
-    private BufferedImage image;
 
     /**
      * Constructs the main panel.
@@ -36,19 +36,23 @@ public class MainPanel extends JPanel {
 
         mainArea = new JLabel();
 
-        update(new BufferedImage(600, 400, TYPE_INT_ARGB));
+        ImageIcon imageIcon = new ImageIcon(new BufferedImage(600, 400, TYPE_INT_ARGB));
+
+        try {
+            BufferedImage img = ImageIO.read(new File("Earth-2560x1600-wallpapershd.org.jpg"));
+            imageIcon = new ImageIcon(img);
+        } catch (Exception e) {
+            //	throw new IOException(e);
+            System.out.println("Error");
+        }
+
+
+        mainArea.setIcon(imageIcon);
 
         JScrollPane sc = new JScrollPane(mainArea);
 
         // Add a border to the panel so we can see its boundaries
         sc.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         add(sc, BorderLayout.CENTER);
-    }
-
-    public void update(BufferedImage image) {
-        this.image = image;
-
-        ImageIcon imageIcon = new ImageIcon(image);
-        mainArea.setIcon(imageIcon);
     }
 }

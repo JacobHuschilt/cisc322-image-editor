@@ -1,5 +1,6 @@
 // $Id: TextType.java,v 1.3 2012/10/24 17:06:40 dalamb Exp $
 // Import only those classes from edfmwk that are essential, for documentation purposes
+
 import java.awt.Component;
 import java.util.HashMap;
 import javax.swing.Action;
@@ -21,7 +22,7 @@ import ca.queensu.cs.dal.flex.log.Log;
 /**
  * <a href="http://en.wikipedia.org/wiki/Factory_(software_concept)">Factory</a>
  * for representations of text files.
- *<p>
+ * <p>
  * Copyright 2010-2011 David Alex Lamb.
  */
 public class TextType implements DocumentType {
@@ -29,15 +30,20 @@ public class TextType implements DocumentType {
      * Construct a new factory for {@link ca.queensu.cs.dal.txt.TextContents}
      * objects.
      */
-    public TextType() {}
+    public TextType() {
+    }
 
-    public String getName() { return "Text file"; }
+    public String getName() {
+        return "Text file";
+    }
+
     /**
      * Create and initialize a new representation for a text document.
+     *
      * @return the new document contents.
      */
     public Document newDocument() {
-	return new TextDocument(this);
+        return new TextDocument(this);
     }
 
     /**
@@ -50,45 +56,46 @@ public class TextType implements DocumentType {
      * would have been static, but specific actions such as Cut and Paste
      * must be fetched from the {@link javax.swing.JTextArea} embedded in
      * the frame displaying the document.
+     *
      * @param doc Document whose state or GUI representation might influence
-     *    the initial state of the menu.
+     *            the initial state of the menu.
      */
     public MenuDescriptor getMenu(Document doc) {
-	MenuDescriptor desc = getStaticMenu().copy();
-	Component comp = doc.getWindow();
-	JTextArea txt = null;
-	if (comp instanceof JScrollPane) {
-	    JScrollPane scroll = (JScrollPane) comp;
-	    comp = scroll.getViewport().getView();
-	}
-	if (comp instanceof JTextArea) txt = (JTextArea) comp;
-	if (txt == null) {
-	    // an internal error
-	    System.out.println("Got unexpected "+comp);
-	    return desc;
-	}
+        MenuDescriptor desc = getStaticMenu().copy();
+        Component comp = doc.getWindow();
+        JTextArea txt = null;
+        if (comp instanceof JScrollPane) {
+            JScrollPane scroll = (JScrollPane) comp;
+            comp = scroll.getViewport().getView();
+        }
+        if (comp instanceof JTextArea) txt = (JTextArea) comp;
+        if (txt == null) {
+            // an internal error
+            System.out.println("Got unexpected " + comp);
+            return desc;
+        }
 
-	// JTextArea-specific actions
-	// System.out.println("Got JTextArea "+txt);
-	setActions(txt);
-	// Keymap km = txt.getKeymap();
-	// if (km==null) System.out.println("No keymap");
-	for(int i=0; i<actionPairs.length; i++) {
-	    String menuName=actionPairs[i][0];
-	    String actionName=actionPairs[i][1];
-	    try {
-		Action ac = getNamedAction(actionName);
-		// System.out.print(menuName+"=");
-		// debugAction(actionName, km, ac);
-		desc.addElement(new MenuElement(menuName, ac));
-	    } catch (TreeException e) {
-		System.out.println("Path error "+menuName+"="+actionName+
-				   ":"+e);
-	    }
-	} // for
-	// JTextArea-specific actions
+        // JTextArea-specific actions
+        // System.out.println("Got JTextArea "+txt);
+        setActions(txt);
+        // Keymap km = txt.getKeymap();
+        // if (km==null) System.out.println("No keymap");
+        for (int i = 0; i < actionPairs.length; i++) {
+            String menuName = actionPairs[i][0];
+            String actionName = actionPairs[i][1];
+            try {
+                Action ac = getNamedAction(actionName);
+                // System.out.print(menuName+"=");
+                // debugAction(actionName, km, ac);
+                desc.addElement(new MenuElement(menuName, ac));
+            } catch (TreeException e) {
+                System.out.println("Path error " + menuName + "=" + actionName +
+                        ":" + e);
+            }
+        } // for
+        // JTextArea-specific actions
 
-	return desc;
+        return desc;
     } // getMenu
 
     /*
@@ -111,10 +118,10 @@ public class TextType implements DocumentType {
     */
 
     private static String[][] actionPairs = {
-	{ "Edit/Copy", DefaultEditorKit.copyAction} ,
-	{ "Edit/Cut", DefaultEditorKit.cutAction},
-	// { "", DefaultEditorKit.cutAction}, // test error check
-	{ "Edit/Paste", DefaultEditorKit.pasteAction}
+            {"Edit/Copy", DefaultEditorKit.copyAction},
+            {"Edit/Cut", DefaultEditorKit.cutAction},
+            // { "", DefaultEditorKit.cutAction}, // test error check
+            {"Edit/Paste", DefaultEditorKit.pasteAction}
     };
 
 
@@ -124,11 +131,12 @@ public class TextType implements DocumentType {
      * {@link #getMenu}
      */
     private HashMap<Object, Action> actions;
+
     /**
      * Gets the action with a specific name.
      */
     private Action getNamedAction(Object name) {
-	return actions.get(name);
+        return actions.get(name);
     }
 
     /**
@@ -136,9 +144,10 @@ public class TextType implements DocumentType {
      * allowed on the current text component. The actions (might?) embed
      * references to the specific text component, which is why we have to do
      * it over again for each document.
+     *
      * @param txt The text component from which to retrieve actions.
      */
-   private void setActions(JTextComponent txt) {
+    private void setActions(JTextComponent txt) {
         actions = new HashMap<Object, Action>();
         Action[] actionsArray = txt.getActions();
         for (int i = 0; i < actionsArray.length; i++) {
@@ -146,7 +155,7 @@ public class TextType implements DocumentType {
             actions.put(a.getValue(Action.NAME), a);
         }
     } // setActions
- 
+
     /**
      * Get the descriptor for the menu items appropriate for this type of
      * document.  For example, <code>"Image/Resize"</code> could be one such
@@ -155,18 +164,18 @@ public class TextType implements DocumentType {
      * <code>"File/Exit"</code>
      */
     private MenuDescriptor getStaticMenu() {
-	if (menu==null) {
-	    menu = new MenuDescriptor();
-	    try {
-		menu.addElement(new MenuElement("Edit/Capitalize", new CapitalizeAction()));
-		menu.addElement(new MenuElement("Edit/Delete", new DeleteAction()));
-		menu.addElement(new MenuElement("Edit/Lower Case", new DownCaseAction()));
-		menu.addElement(new MenuElement("Edit/Upper Case", new UpCaseAction()));
-	    } catch (Exception e) {
-		Log.internalError("Menu element error "+e.getLocalizedMessage());
-	    }
-	}
-	return menu;
+        if (menu == null) {
+            menu = new MenuDescriptor();
+            try {
+                menu.addElement(new MenuElement("Edit/Capitalize", new CapitalizeAction()));
+                menu.addElement(new MenuElement("Edit/Delete", new DeleteAction()));
+                menu.addElement(new MenuElement("Edit/Lower Case", new DownCaseAction()));
+                menu.addElement(new MenuElement("Edit/Upper Case", new UpCaseAction()));
+            } catch (Exception e) {
+                Log.internalError("Menu element error " + e.getLocalizedMessage());
+            }
+        }
+        return menu;
     }
 
     /**
@@ -181,12 +190,12 @@ public class TextType implements DocumentType {
      * for HyperText Markup Language documents.
      */
     public String[] getExtensions() {
-	return extensions;
+        return extensions;
     }
 
     /**
      * The expected extensions for files the application can edit.
      */
-    private static String[] extensions = { "txt", "html" };
+    private static String[] extensions = {"txt", "html"};
 
 } // end class TextType

@@ -4,11 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 // Import only those classes from edfmwk that are essential, for documentation purposes
 import ca.queensu.cs.dal.edfmwk.Application;
-import ca.queensu.cs.dal.edfmwk.act.AboutAction;
-import ca.queensu.cs.dal.edfmwk.act.CreditAction;
-import ca.queensu.cs.dal.edfmwk.act.DefaultAction;
-import ca.queensu.cs.dal.edfmwk.act.HelpAction;
-import ca.queensu.cs.dal.edfmwk.act.NewAction;
+import ca.queensu.cs.dal.edfmwk.act.*;
 import ca.queensu.cs.dal.edfmwk.doc.DocumentType;
 import ca.queensu.cs.dal.edfmwk.doc.DocumentManager;
 import ca.queensu.cs.dal.edfmwk.i18n.Localizers;
@@ -49,7 +45,7 @@ public class TextEditor extends Application {
 			menu = new MenuDescriptor(Menus.getStandardMenu());
 			//System.err.println("Got standard menu.");
 			try {
-				//menu.addElement(new MenuElement("Edit")); // position empty menu
+//				menu.addElement(new MenuElement("Edit")); // position empty menu
 				//menu.addElement(new MenuElement("View")); // position empty menu
 				menu.addPath(Menus.getLanguageMenu());
 				//menu.addElement(new MenuElement("Tools")); // position empty menu
@@ -70,9 +66,9 @@ public class TextEditor extends Application {
 	public TextEditor() {
 		super(title);
 		// TODO: Get the image from image contents, and pass it to MainPanel
-		mainPanel = new MainPanel(new BufferedImage(600, 400, TYPE_INT_ARGB));
-
-		DocumentType fac = new TextType();
+//		mainPanel = new MainPanel(new BufferedImage(600, 400, TYPE_INT_ARGB));
+		mainPanel = new MainPanel();
+		DocumentType fac = new ImageType();
 		DocumentManager manager = getDocumentManager();
 		//System.err.println("Got to return from getDocumentManager");
 		if (manager != null) {
@@ -85,6 +81,7 @@ public class TextEditor extends Application {
 		MenuDescriptor mainMenu = getMainMenu();
 		//System.err.println("Returned from get main menu");
 		MenuElement newAction = mainMenu.getElement("New");
+
 		if (newAction != null) {
 			newAction.setAction(new NewAction(fac));
 		}
