@@ -20,7 +20,13 @@ public class ImageContents {
      * Constructs a default image file contents of size 100x100 px.
      */
     public ImageContents() {
-        img = new BufferedImage(500, 500, TYPE_INT_ARGB);
+        img = new BufferedImage(500, 800, TYPE_INT_ARGB);
+        try {
+            InputStream in = new FileInputStream("Meme.jpg");
+            this.open(in);
+        } catch(Exception e) {
+            System.out.println("Error");
+        }
     } // end constructor
 
     /**

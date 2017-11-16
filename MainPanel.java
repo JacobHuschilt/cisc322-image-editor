@@ -38,13 +38,13 @@ public class MainPanel extends JPanel {
 
         ImageIcon imageIcon = new ImageIcon(new BufferedImage(600, 400, TYPE_INT_ARGB));
 
-        try {
-            BufferedImage img = ImageIO.read(new File("Earth-2560x1600-wallpapershd.org.jpg"));
-            imageIcon = new ImageIcon(img);
-        } catch (Exception e) {
-            //	throw new IOException(e);
-            System.out.println("Error");
-        }
+        // try {
+        //     BufferedImage img = ImageIO.read(new File("Earth-2560x1600-wallpapershd.org.jpg"));
+        //     imageIcon = new ImageIcon(img);
+        // } catch (Exception e) {
+        //     //	throw new IOException(e);
+        //     System.out.println("Error");
+        // }
 
 
         mainArea.setIcon(imageIcon);
