@@ -169,7 +169,7 @@ public class ImageType implements DocumentType {
             menu = new MenuDescriptor();
             try {
 		        menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
-//		menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
+                menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
 //		menu.addElement(new MenuElement("Edit/Resize", new ResizeAction()));
 //		menu.addElement(new MenuElement("Edit/Adjust Brightness", new AdjustBrightnessAction()));
             } catch (Exception e) {

@@ -87,4 +87,8 @@ public class ImageContents {
         return img;
     }
 
+    public void setImg(BufferedImage img) {
+        this.img = img;
+    }
+
 } // end TextContents

@@ -58,6 +58,7 @@ public abstract class ImageAction extends DefaultAction {
 	    //ImageContents con = (ImageContents) doc.getContents();
 		changeImage(con);
 		label.setIcon(new ImageIcon(con.getImg()));
+		label.revalidate();
 	} catch (Exception ex) {
 	    Log.error("Image action error: "+ex.getLocalizedMessage());
 	}
