@@ -2,6 +2,7 @@
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 // import javax.swing.Action;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -52,9 +53,11 @@ public abstract class ImageAction extends DefaultAction {
 	    CommonWindow win = app.getActiveWindow();
 	    JLabel label = (JLabel) ((JScrollPane) win.getContentPane()).getViewport().getView();
 	    // if (firstArea==null) setArea(area);
-	    ImageDocument doc = (ImageDocument) app.getActiveDocument();
-	    ImageContents con = (ImageContents) doc.getContents();
-	    changeImage(con);
+		ImageDocument doc = (ImageDocument) app.getActiveDocument();
+		ImageContents con = doc.getContents();
+	    //ImageContents con = (ImageContents) doc.getContents();
+		changeImage(con);
+		label.setIcon(new ImageIcon(con.getImg()));
 	} catch (Exception ex) {
 	    Log.error("Image action error: "+ex.getLocalizedMessage());
 	}

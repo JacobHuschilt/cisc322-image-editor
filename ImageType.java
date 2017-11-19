@@ -75,23 +75,23 @@ public class ImageType implements DocumentType {
 
         // JTextArea-specific actions
         // System.out.println("Got JTextArea "+txt);
-//        setActions(image);
-//        // Keymap km = txt.getKeymap();
-//        // if (km==null) System.out.println("No keymap");
-//        for (int i = 0; i < actionPairs.length; i++) {
-//            String menuName = actionPairs[i][0];
-//            String actionName = actionPairs[i][1];
-//            try {
-//                Action ac = getNamedAction(actionName);
-//                // System.out.print(menuName+"=");
-//                // debugAction(actionName, km, ac);
-//                desc.addElement(new MenuElement(menuName, ac));
-//            } catch (TreeException e) {
-//                System.out.println("Path error " + menuName + "=" + actionName +
-//                        ":" + e);
-//            }
-//        } // for
-        // JTextArea-specific actions
+       setActions(image);
+       // Keymap km = txt.getKeymap();
+       // if (km==null) System.out.println("No keymap");
+       //for (int i = 0; i < actionPairs.length; i++) {
+           //String menuName = actionPairs[i][0];
+           //String actionName = actionPairs[i][1];
+           //try {
+               //Action ac = new RotateAction();
+               //Action ac = getNamedAction(actionName);
+               // System.out.print(menuName+"=");
+               // debugAction(actionName, km, ac);
+               //desc.addElement(new MenuElement(menuName, ac));
+           //} catch (TreeException e) {
+               //System.out.println("Path error " + menuName + "=" + actionName +
+               //        ":" + e);
+           //}
+       //} // for
 
         return desc;
     } // getMenu
@@ -116,8 +116,9 @@ public class ImageType implements DocumentType {
     */
 
     //Not sure what to do here...helpp?? -Julia
+    // Some error here... What do these "actions" do here?
     private static String[][] actionPairs = {
-//	{ "Edit/Rotate", DefaultEditorKit.} ,
+	{ "Edit/Rotate", "rotate-clockwise"} ,
 //	{ "Edit/Cut", DefaultEditorKit.cutAction},
             // { "", DefaultEditorKit.cutAction}, // test error check
 //	{ "Edit/Paste", DefaultEditorKit.pasteAction}
@@ -146,14 +147,15 @@ public class ImageType implements DocumentType {
      *
      * @param txt The text component from which to retrieve actions.
      */
-//    private void setActions(JLabel image) {
-//        actions = new HashMap<Object, Action>();
-//        ActionMap actionMap = image.getActionMap();
-//        for (int i = 0; i < actionMap.size(); i++) {
-//            Action a = actionsArray[i];
-//            actions.put(a.getValue(Action.NAME), a);
-//        }
-//    } // setActions
+   private void setActions(JLabel image) {
+       actions = new HashMap<Object, Action>();
+       ActionMap actionMap = image.getActionMap();
+       Object[] keys = actionMap.allKeys();
+       for (int i = 0; i < actionMap.size(); i++) {
+           Action a = actionMap.get(keys[i]);
+           actions.put(a.getValue(Action.NAME), a);
+       }
+   } // setActions
 
     /**
      * Get the descriptor for the menu items appropriate for this type of
@@ -166,7 +168,7 @@ public class ImageType implements DocumentType {
         if (menu == null) {
             menu = new MenuDescriptor();
             try {
-//		menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
+		        menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
 //		menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
 //		menu.addElement(new MenuElement("Edit/Resize", new ResizeAction()));
 //		menu.addElement(new MenuElement("Edit/Adjust Brightness", new AdjustBrightnessAction()));

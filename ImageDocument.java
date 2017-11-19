@@ -13,6 +13,7 @@ import ca.queensu.cs.dal.edfmwk.doc.DocumentException;
 public class ImageDocument extends AbstractDocument implements javax.swing.event.DocumentListener {
 
     private ImageContents contents;
+    private JLabel imgLabel;
 
     /**
      * Constructs a document representation.
@@ -26,9 +27,14 @@ public class ImageDocument extends AbstractDocument implements javax.swing.event
         super(type);
         contents = new ImageContents();
 //        contents.addDocumentListener(this);
-        JLabel imgLabel = new JLabel(new ImageIcon(contents.getImg()));
+        imgLabel = new JLabel(new ImageIcon(contents.getImg()));
         window = new JScrollPane(imgLabel);
     } // end ImageDocument
+
+    // Getter for the JLabel
+    public JLabel getImageLabel() {
+        return imgLabel;
+    }
 
     // Image document change listeners: all invoke the framework's own document
     // change listeners.
@@ -91,6 +97,7 @@ public class ImageDocument extends AbstractDocument implements javax.swing.event
     public void open(InputStream in)
             throws IOException {
         contents.open(in);
+        imgLabel.setIcon(new ImageIcon(contents.getImg()));
         setChanged(false);
     } // open
 

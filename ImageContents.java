@@ -21,12 +21,6 @@ public class ImageContents {
      */
     public ImageContents() {
         img = new BufferedImage(500, 800, TYPE_INT_ARGB);
-        try {
-            InputStream in = new FileInputStream("Meme.jpg");
-            this.open(in);
-        } catch(Exception e) {
-            System.out.println("Error");
-        }
     } // end constructor
 
     /**
