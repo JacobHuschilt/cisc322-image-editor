@@ -1,13 +1,7 @@
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 
-// For documentation purposes, import only edfmwk classes actually used.
-import ca.queensu.cs.dal.edfmwk.Application;
-import ca.queensu.cs.dal.edfmwk.act.DefaultAction;
-import ca.queensu.cs.dal.edfmwk.win.CommonWindow;
-import ca.queensu.cs.dal.flex.log.Log;
 /**
  * {@link javax.swing.Action} for implementing "Rotate" functionality.
  *<p>

@@ -1,5 +1,3 @@
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
 // Import only those classes from edfmwk that are essential, for documentation purposes
 import ca.queensu.cs.dal.edfmwk.Application;
 import ca.queensu.cs.dal.edfmwk.act.*;
@@ -11,10 +9,6 @@ import ca.queensu.cs.dal.edfmwk.menu.MenuElement;
 import ca.queensu.cs.dal.edfmwk.Menus;
 import ca.queensu.cs.dal.flex.Register;
 import ca.queensu.cs.dal.flex.i18n.Localizer;
-
-import java.awt.image.BufferedImage;
-
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
  * A simple image editor using the document framework.

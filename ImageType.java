@@ -4,16 +4,9 @@
 import java.awt.Component;
 import java.util.HashMap;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.Keymap;
-import java.awt.image.*;
-// import javax.swing.KeyStroke;
-import ca.queensu.cs.dal.edfmwk.act.DefaultAction;
 import ca.queensu.cs.dal.edfmwk.doc.Document;
 import ca.queensu.cs.dal.edfmwk.doc.DocumentType;
-import ca.queensu.cs.dal.edfmwk.doc.DocumentManager;
 import ca.queensu.cs.dal.edfmwk.menu.MenuDescriptor;
-import ca.queensu.cs.dal.data.tree.TreeException;
 import ca.queensu.cs.dal.edfmwk.menu.MenuElement;
 import ca.queensu.cs.dal.flex.log.Log;
 
