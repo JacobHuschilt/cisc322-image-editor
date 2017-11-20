@@ -1,10 +1,10 @@
-MAIN=TextEditor
+MAIN=ImageEditor
 CLASSPATH=".:./txtlib.jar"
 
 run: compile
 	java -cp ${CLASSPATH} ${MAIN}
-compile: TextEditor.class
-TextEditor.class: TextEditor.java
+compile: ImageEditor.class
+ImageEditor.class: ImageEditor.java
 	javac -cp ${CLASSPATH} ${MAIN}.java
 
 clean:
