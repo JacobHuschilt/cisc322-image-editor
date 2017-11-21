@@ -1,0 +1,2 @@
+Class-Path: ImageEditor.jar txtlib.jar
+Main-Class: ImageEditor
