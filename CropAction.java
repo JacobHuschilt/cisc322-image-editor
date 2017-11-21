@@ -1,11 +1,10 @@
 import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
-
 import javax.swing.*;
 
 /**
  * {@link javax.swing.Action} for implementing "Crop" functionality.
- *<p>
+ * <p>
  * based on code written by David Lamb
  * last modified by David Seekatz and Julia Yach
  */
@@ -15,11 +14,12 @@ public class CropAction extends ImageAction {
      * Constructs a crop action - crops the image
      */
     public CropAction() {
-		super("Crop");
+        super("Crop");
     } // end constructor CropAction
 
     /**
-     * Crop the image, returning a subimage of the original.
+     * Crop the image, returning a sub-image of the original.
+     *
      * @param con The contents of the image document to be cropped
      */
     protected void changeImage(ImageContents con) {
@@ -45,14 +45,18 @@ public class CropAction extends ImageAction {
         }
     } // end changeImage
 
-    // Really bad quick and dirty dialog box to get user input
+    /**
+     * Presents a JOptionPane with inputs needed for the crop action.
+     *
+     * @return int[] results from user input, startX, startY, width, height
+     */
     private int[] getUserInput() {
         JTextField xStart = new JTextField();
         JTextField yStart = new JTextField();
         JTextField width = new JTextField();
         JTextField height = new JTextField();
         int[] resultArray = new int[4];
-        final JComponent[] inputs = new JComponent[] {
+        final JComponent[] inputs = new JComponent[]{
                 new JLabel("Starting x location"),
                 xStart,
                 new JLabel("Starting y location"),
@@ -79,5 +83,5 @@ public class CropAction extends ImageAction {
         }
         return resultArray;
     }
-    
+
 } // end class CropAction

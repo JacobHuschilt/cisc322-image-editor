@@ -1,20 +1,11 @@
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Color;
 import javax.swing.*;
 
-// For documentation purposes, import only edfmwk classes actually used.
-import ca.queensu.cs.dal.edfmwk.Application;
-import ca.queensu.cs.dal.edfmwk.act.DefaultAction;
-import ca.queensu.cs.dal.edfmwk.win.CommonWindow;
-import ca.queensu.cs.dal.flex.log.Log;
 /**
  * {@link javax.swing.Action} for implementing "Resize" functionality.
- *<p>
+ * <p>
  * based on code written by David Lamb
  * last modified by David Seekatz and Julia Yach
  */
@@ -24,12 +15,13 @@ public class ResizeAction extends ImageAction {
      * Constructs a resize action - resizes the image
      */
     public ResizeAction() {
-		super("Resize");
+        super("Resize");
     } // end constructor ResizeAction
 
     /**
-     * Resize the image to the specified X and Y values - allows the 
+     * Resize the image to the specified X and Y values - allows the
      * image to be stretched/distorted from its original proportions.
+     *
      * @param con The contents of the image document to be resized
      */
     protected void changeImage(ImageContents con) {
@@ -47,22 +39,26 @@ public class ResizeAction extends ImageAction {
             BufferedImage newImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
             Graphics g = newImg.createGraphics();
-            g.drawImage(tmp,0,0,null);
+            g.drawImage(tmp, 0, 0, null);
             g.dispose();
 
             con.setImg(newImg);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } // end try-catch
     } // end changeImage
 
-    // Really bad quick and dirty dialog box to get user input
+    /**
+     * Presents a JOptionPane with inputs needed for the resize action.
+     *
+     * @return int[] results from user input, width, height
+     */
     private int[] getUserInput() {
         JTextField width = new JTextField();
         JTextField height = new JTextField();
         int[] resultArray = new int[2];
-        final JComponent[] inputs = new JComponent[] {
+        final JComponent[] inputs = new JComponent[]{
                 new JLabel("Re-sized image width"),
                 width,
                 new JLabel("Re-sized image height"),
@@ -83,5 +79,5 @@ public class ResizeAction extends ImageAction {
         }
         return resultArray;
     }
-    
+
 } // end class CropAction

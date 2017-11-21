@@ -1,10 +1,9 @@
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
-import javax.swing.*;
 
 /**
  * {@link javax.swing.Action} for implementing "Adjust Brightness" functionality.
- *<p>
+ * <p>
  * based on code written by David Lamb
  * Created by jacobhuschilt on 11/20/17.
  */

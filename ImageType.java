@@ -3,6 +3,7 @@
 import java.awt.Component;
 import java.util.HashMap;
 import javax.swing.*;
+
 import ca.queensu.cs.dal.edfmwk.doc.Document;
 import ca.queensu.cs.dal.edfmwk.doc.DocumentType;
 import ca.queensu.cs.dal.edfmwk.menu.MenuDescriptor;
@@ -22,7 +23,7 @@ public class ImageType implements DocumentType {
      * objects.
      */
     public ImageType() {
-    } // end contructor
+    } // end constructor
 
     /**
      * Returns the name for this type of document.
@@ -90,17 +91,18 @@ public class ImageType implements DocumentType {
      *
      * @param image the JLabel from which to retrieve the actions.
      */
-   private void setActions(JLabel image) {
-       actions = new HashMap<Object, Action>();
-       ActionMap actionMap = image.getActionMap();
-       Object[] keys = actionMap.allKeys();
-       for (int i = 0; i < actionMap.size(); i++) {
-           Action a = actionMap.get(keys[i]);
-           actions.put(a.getValue(Action.NAME), a);
-       }
-   } // setActions
+    private void setActions(JLabel image) {
+        actions = new HashMap<Object, Action>();
+        ActionMap actionMap = image.getActionMap();
+        Object[] keys = actionMap.allKeys();
+        for (int i = 0; i < actionMap.size(); i++) {
+            Action a = actionMap.get(keys[i]);
+            actions.put(a.getValue(Action.NAME), a);
+        }
+    } // setActions
 
     // Not super sure if we actually need this part...
+
     /**
      * Get the descriptor for the menu items appropriate for this type of
      * document.  For example, <code>"Image/Resize"</code> could be one such
@@ -112,7 +114,7 @@ public class ImageType implements DocumentType {
         if (menu == null) {
             menu = new MenuDescriptor();
             try {
-		        menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
+                menu.addElement(new MenuElement("Edit/Rotate", new RotateAction()));
                 menu.addElement(new MenuElement("Edit/Crop", new CropAction()));
                 menu.addElement(new MenuElement("Edit/Resize", new ResizeAction()));
                 menu.addElement(new MenuElement("Edit/Adjust Brightness", new BrightnessAction()));
