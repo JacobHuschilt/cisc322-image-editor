@@ -62,7 +62,7 @@ public class ImageEditor extends Application {
 		// TODO: Fix localization for image-specific actions
 		// Localizers.Menu.getLocalizer().addBaseName(packageName+".Text");
 		// Localizers.Message.getLocalizer().addBaseName(packageName+".Text");
-		addLocalizerBaseName(packageName + ".Text");
+		addLocalizerBaseName(".Image");
 		MenuDescriptor mainMenu = getMainMenu();
 		MenuElement newAction = mainMenu.getElement("New");
 
