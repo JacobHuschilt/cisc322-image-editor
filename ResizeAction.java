@@ -5,6 +5,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Color;
+import javax.swing.*;
 
 // For documentation purposes, import only edfmwk classes actually used.
 import ca.queensu.cs.dal.edfmwk.Application;
@@ -33,9 +34,14 @@ public class ResizeAction extends ImageAction {
      */
     protected void changeImage(ImageContents con) {
         try {
+            int[] input = getUserInput();
+            if (input == null) {
+                return;
+            }
+
             BufferedImage image = con.getImg();
-            int width = 100;
-            int height = 100;
+            int width = input[0];
+            int height = input[1];
 
             Image tmp = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
             BufferedImage newImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -50,5 +56,32 @@ public class ResizeAction extends ImageAction {
             e.printStackTrace();
         } // end try-catch
     } // end changeImage
+
+    // Really bad quick and dirty dialog box to get user input
+    private int[] getUserInput() {
+        JTextField width = new JTextField();
+        JTextField height = new JTextField();
+        int[] resultArray = new int[2];
+        final JComponent[] inputs = new JComponent[] {
+                new JLabel("Re-sized image width"),
+                width,
+                new JLabel("Re-sized image height"),
+                height
+        };
+        int result = JOptionPane.showConfirmDialog(null, inputs, "Please define the crop area", JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                resultArray[0] = Integer.parseInt(width.getText());
+                resultArray[1] = Integer.parseInt(height.getText());
+            } catch (Exception e) {
+                // Make a dialog box here if we have time
+                System.out.println("Invalid input!");
+                return null;
+            }
+        } else {
+            return null;
+        }
+        return resultArray;
+    }
     
 } // end class CropAction

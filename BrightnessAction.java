@@ -1,5 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import javax.swing.*;
 
 /**
  * {@link javax.swing.Action} for implementing "Adjust Brightness" functionality.
@@ -23,9 +24,15 @@ public class BrightnessAction extends ImageAction {
      */
     protected void changeImage(ImageContents contents) {
         try {
-            BufferedImage image = contents.getImg();
-            float brightnessFactor = (float) 0.75;
+            // Display a custom prompt with a JSlider to adjust brightness
+            BrightnessSliderOptionPane prompt = new BrightnessSliderOptionPane();
+            prompt.show();
 
+            float brightnessFactor = prompt.getBrightnessLevel();
+
+            BufferedImage image = contents.getImg();
+
+            // Multiply each pixel by the scaling factor from the slider
             RescaleOp brightnessScaler = new RescaleOp(brightnessFactor, 0, null);
 
             image = brightnessScaler.filter(image, image);
