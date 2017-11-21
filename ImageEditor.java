@@ -25,7 +25,7 @@ public class ImageEditor extends Application {
 	private static String adapted = "\nAdapted from work by David Lamb.";
 	private static String aboutMsg = title + "\nWritten by" + copyright + adapted;
 	private static String packageName = "ca.queensu.cs.dal.txt";
-	private static String version = "0.01";
+	private static String version = "0.0001";
 	private static Register register;
 	//private final String helpURI = "http://cs.queensu.ca/home/dalamb/java/txt/help.html";
 
@@ -36,13 +36,8 @@ public class ImageEditor extends Application {
 	public MenuDescriptor getMainMenu() {
 		if (menu == null) {
 			menu = new MenuDescriptor(Menus.getStandardMenu());
-			//System.err.println("Got standard menu.");
 			try {
-//				menu.addElement(new MenuElement("Edit")); // position empty menu
-				//menu.addElement(new MenuElement("View")); // position empty menu
 				menu.addPath(Menus.getLanguageMenu());
-				//menu.addElement(new MenuElement("Tools")); // position empty menu
-				//menu.addElement(new MenuElement("Help/Help", new HelpAction(helpURI), "Help contents"));
 				menu.addElement(new MenuElement("Help/About", new AboutAction(aboutMsg)));
 				menu.addElement(new MenuElement("Help/Credits", new CreditAction()));
 			} catch (Exception e) {

@@ -8,7 +8,8 @@ import ca.queensu.cs.dal.edfmwk.doc.DocumentException;
 /**
  * Implementation of an image document
  * <p>
- * Last modified 2017-10-26 by David Seekatz
+ * Based on code written by David Lamb
+ * Last modified by David Seekatz
  */
 public class ImageDocument extends AbstractDocument implements javax.swing.event.DocumentListener {
 
@@ -16,28 +17,29 @@ public class ImageDocument extends AbstractDocument implements javax.swing.event
     private JLabel imgLabel;
 
     /**
-     * Constructs a document representation.
+     * Constructs an image document representation.
+     * We are using an ImageIcon set in a JLabel.
      *
      * @param type The type of the document.
      */
-    // Since I'm not very familiar with swing, I don't know if this is the best way
-    // to convert the image to a swing component. We might have to re-work this constructor.
-    // -David S.
     public ImageDocument(DocumentType type) {
         super(type);
         contents = new ImageContents();
-//        contents.addDocumentListener(this);
         imgLabel = new JLabel(new ImageIcon(contents.getImg()));
         window = new JScrollPane(imgLabel);
     } // end ImageDocument
 
-    // Getter for the JLabel
+    /**
+     * Gets the document's image label.
+     */
     public JLabel getImageLabel() {
         return imgLabel;
-    }
+    } // end getImageLabel
 
     // Image document change listeners: all invoke the framework's own document
     // change listeners.
+    // We are unsure which of these are applicable/necessary, but everything
+    // works fine so we have left them in.
 
     /**
      * Gives notification that an attribute or set of attributes changed.
@@ -89,13 +91,13 @@ public class ImageDocument extends AbstractDocument implements javax.swing.event
 
     /**
      * Reads the entire document, and closes the stream from which it is read.
+     * It then updates the image label so that the image is displayed.
      *
      * @param in Where to read the document from.
      * @throws IOException if any I/O errors occur, in which case it will have
      *                     closed the stream.
      */
-    public void open(InputStream in)
-            throws IOException {
+    public void open(InputStream in) throws IOException {
         contents.open(in);
         imgLabel.setIcon(new ImageIcon(contents.getImg()));
         setChanged(false);
@@ -108,5 +110,5 @@ public class ImageDocument extends AbstractDocument implements javax.swing.event
     ImageContents getContents() {
         return contents;
     }
-} // end class TextDocument
+} // end class ImageDocument
 

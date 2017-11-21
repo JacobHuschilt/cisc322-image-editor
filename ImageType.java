@@ -1,4 +1,3 @@
-// $Id: TextType.java,v 1.3 2012/10/24 17:06:40 dalamb Exp $
 // Import only those classes from edfmwk that are essential, for documentation purposes
 
 import java.awt.Component;
@@ -17,25 +16,29 @@ import ca.queensu.cs.dal.flex.log.Log;
  * Last modified by Julia Yach.
  */
 public class ImageType implements DocumentType {
+
     /**
      * Construct a new factory for Image
      * objects.
      */
     public ImageType() {
-    }
+    } // end contructor
 
+    /**
+     * Returns the name for this type of document.
+     */
     public String getName() {
         return "Image file";
-    }
+    } // end getName
 
     /**
      * Create and initialize a new representation for an image document.
      *
-     * @return the new document contents.
+     * @return the new document representation.
      */
     public ImageDocument newDocument() {
         return new ImageDocument(this);
-    }
+    } // end newDocument
 
     /**
      * Get the descriptor for the menu items appropriate for this type of
@@ -43,10 +46,6 @@ public class ImageType implements DocumentType {
      * menu element for an image processing program.  The descriptor must
      * not include type-independent menu items, such as
      * <code>"File/Exit"</code>
-     * Normally the actual {@link ca.queensu.cs.dal.edfmwk.menu.MenuDescriptor}
-     * would have been static, but specific actions such as Cut and Paste
-     * must be fetched from the {@link javax.swing.JTextArea} embedded in
-     * the frame displaying the document.
      *
      * @param doc Document whose state or GUI representation might influence
      *            the initial state of the menu.
@@ -66,60 +65,13 @@ public class ImageType implements DocumentType {
             return desc;
         }
 
-        // JTextArea-specific actions
-        // System.out.println("Got JTextArea "+txt);
-       setActions(image);
-       // Keymap km = txt.getKeymap();
-       // if (km==null) System.out.println("No keymap");
-       //for (int i = 0; i < actionPairs.length; i++) {
-           //String menuName = actionPairs[i][0];
-           //String actionName = actionPairs[i][1];
-           //try {
-               //Action ac = new RotateAction();
-               //Action ac = getNamedAction(actionName);
-               // System.out.print(menuName+"=");
-               // debugAction(actionName, km, ac);
-               //desc.addElement(new MenuElement(menuName, ac));
-           //} catch (TreeException e) {
-               //System.out.println("Path error " + menuName + "=" + actionName +
-               //        ":" + e);
-           //}
-       //} // for
-
+        setActions(image);
         return desc;
     } // getMenu
 
-    /*
-    static void debugAction(Object name, Keymap km, Action ac) {
-	System.out.print(name);
-	if (km!=null) {
-	    KeyStroke strokes[] = km.getKeyStrokesForAction(ac);
-	    if (strokes == null) {
-		System.out.print(" no keystrokes");
-	    } else if (strokes.length==0) {
-		System.out.print(" zero-length keystrokes");
-	    } else {
-		for(int j=0; j<strokes.length; j++) {
-		    System.out.print(" "+strokes[j]);
-		}
-	    }
-	}
-	System.out.println();
-    }
-    */
-
-    //Not sure what to do here...helpp?? -Julia
-    // Some error here... What do these "actions" do here?
-    private static String[][] actionPairs = {
-	{ "Edit/Rotate", "rotate-clockwise"} ,
-//	{ "Edit/Cut", DefaultEditorKit.cutAction},
-            // { "", DefaultEditorKit.cutAction}, // test error check
-//	{ "Edit/Paste", DefaultEditorKit.pasteAction}
-    };
-
 
     /**
-     * Map from action names to text-component-specific actions.
+     * Map from action names to image actions.
      * It should only be considered valid within a single call to
      * {@link #getMenu}
      */
@@ -130,15 +82,13 @@ public class ImageType implements DocumentType {
      */
     private Action getNamedAction(Object name) {
         return actions.get(name);
-    }
+    } // end getNamedAction
 
     /**
      * Set the {@link #actions} member to contain a list of the actions
-     * allowed on the current text component. The actions (might?) embed
-     * references to the specific text component, which is why we have to do
-     * it over again for each document.
+     * allowed on the current image.
      *
-     * @param txt The text component from which to retrieve actions.
+     * @param image the JLabel from which to retrieve the actions.
      */
    private void setActions(JLabel image) {
        actions = new HashMap<Object, Action>();
@@ -150,6 +100,7 @@ public class ImageType implements DocumentType {
        }
    } // setActions
 
+    // Not super sure if we actually need this part...
     /**
      * Get the descriptor for the menu items appropriate for this type of
      * document.  For example, <code>"Image/Resize"</code> could be one such
@@ -192,4 +143,4 @@ public class ImageType implements DocumentType {
      */
     private static String[] extensions = {"jpg", "JPG", "jpeg", "JPEG", "png"};
 
-} // end class TextType
+} // end class ImageType

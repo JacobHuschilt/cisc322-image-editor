@@ -10,14 +10,13 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  *<p>
  * Adapted from work by David Alex Lamb
  * Last modified by David Seekatz
- * 2017-10-26
  */
 public class ImageContents {
 
     private BufferedImage img;
 
     /**
-     * Constructs a default image file contents of size 100x100 px.
+     * Constructs a default image file contents of size 500x800 px.
      */
     public ImageContents() {
         img = new BufferedImage(500, 800, TYPE_INT_ARGB);
@@ -38,7 +37,7 @@ public class ImageContents {
     } // end method open
 
     /**
-     * Saves the image document.
+     * Saves the image document.  Currently we only support saving images as png files.
      * @param out Where to write the document.
      * @throws IOException if any I/O errors occur, in which case it will have
      * closed the stream.
@@ -49,7 +48,6 @@ public class ImageContents {
 	        ImageIO.write(img, "png", out);
 	    } catch (Exception e) {
 	        out.close();
-	        //	    throw new IOException(e);
 	        throw new IOException(e.getLocalizedMessage());
 	    }
     } // end save
@@ -81,14 +79,20 @@ public class ImageContents {
     } // end getContentStream
 
     /**
-     * Gets the BufferedImage object.
+     * Gets the BufferedImage attribute.
      */
     public BufferedImage getImg() {
         return img;
-    }
+    } // end getImg
 
+    /**
+     * Sets the BufferedImage attribute.  This method is used to
+     * update the internal representation of an image after an action
+     * has been performed.
+     * @param img the BufferedImage to be set as the new attribute
+     */
     public void setImg(BufferedImage img) {
         this.img = img;
-    }
+    } // end setImg
 
-} // end TextContents
+} // end ImageContents
