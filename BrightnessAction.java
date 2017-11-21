@@ -24,14 +24,16 @@ public class BrightnessAction extends ImageAction {
      */
     protected void changeImage(ImageContents contents) {
         try {
-            float input = getUserInput();
-            if (input < 0) {
-                return;
-            } // end if
+            // Display a custom prompt with a JSlider to adjust brightness
+            BrightnessSliderOptionPane prompt = new BrightnessSliderOptionPane();
+            prompt.show();
+
+            float brightnessFactor = prompt.getBrightnessLevel();
 
             BufferedImage image = contents.getImg();
 
-            RescaleOp brightnessScaler = new RescaleOp(input, 0, null);
+            // Multiply each pixel by the scaling factor from the slider
+            RescaleOp brightnessScaler = new RescaleOp(brightnessFactor, 0, null);
 
             image = brightnessScaler.filter(image, image);
 
@@ -40,30 +42,4 @@ public class BrightnessAction extends ImageAction {
             e.printStackTrace();
         }
     }
-
-    // Really bad quick and dirty dialog box to get user input
-    private float getUserInput() {
-        float input;
-        JTextField brightnessFactor = new JTextField();
-        final JComponent[] inputs = new JComponent[] {
-                new JLabel("Brightness Factor"),
-                brightnessFactor
-        };
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Please define the crop area", JOptionPane.PLAIN_MESSAGE);
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                input = Float.parseFloat(brightnessFactor.getText());
-            } catch (Exception e) {
-                // Make a dialog box here if we have time
-                System.out.println("Invalid input!");
-                return -1;
-            } // end try-catch
-            if (input < 0) {
-                input = 0;
-            } // end if
-        } else {
-            return -1;
-        } // end if-else
-        return input;
-}
 }
