@@ -64,7 +64,7 @@ public class ResizeAction extends ImageAction {
                 new JLabel("Re-sized image height"),
                 height
         };
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Please define the crop area", JOptionPane.PLAIN_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, inputs, "Please enter the dimensions", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             try {
                 resultArray[0] = Integer.parseInt(width.getText());
